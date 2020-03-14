@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Main from './pages/Main/Main';
 import Galeria from './pages/Galeria';
-import Materias from './pages/Materias';
+import Aulas from './pages/aulas/Aulas';
 
 
 const Routes: React.FC = () => {
@@ -26,10 +26,35 @@ const Routes: React.FC = () => {
                         }, 
                     }}  
                 />
+                <Stack.Screen 
+                    name="Galeria" 
+                    component={Galeria}
+                    options={{ 
+                        title: 'Galeria', 
+                        headerStyle: {
+                            backgroundColor: '#7D40E7'
+                        }, 
+                        headerTintColor: '#fff', 
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                        }, 
+                    }}  
+                />
+                <Stack.Screen 
+                    name="Aulas" 
+                    component={Aulas}
+                    options={{ 
+                        title: 'Cadastrar', 
+                        headerStyle: {
+                            backgroundColor: '#7D40E7'
+                        }, 
+                        headerTintColor: '#fff', 
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                        }, 
+                    }}  
+                />
                 
-                
-                <Stack.Screen options={{ title: 'Galeria' }} name="Galeria" component={Galeria} />
-                <Stack.Screen options={{ title: 'Cadastrar' }} name="Materias" component={Materias} />
             </Stack.Navigator>
         </NavigationContainer>
   );

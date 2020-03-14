@@ -5,7 +5,7 @@ import { Camera } from 'expo-camera';
 import { sCamera } from "./styles"
 
 interface IProps {
-    setCameraVisible: React.Dispatch<React.SetStateAction<boolean>>
+    setCameraVisible: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 const CameraControl: React.FC<IProps> = ({setCameraVisible}) => {
