@@ -5,10 +5,31 @@ export const sAulas = StyleSheet.create({
         flex: 1,
     },
 
+    calendarIcon:{
+        width:30,
+        height:30
+    },
+
     input:{
         backgroundColor:"red",
-        height:40,
         borderColor:"black",
-        borderWidth:1
+        borderWidth:1,
+        flex: 1,
     },
 });
+
+export const sOverlayVizualizar = StyleSheet.create({
+    overlay:{
+        padding: 0, 
+        overflow: "hidden" 
+    },
+    diaTitle:{
+        fontSize: 25, 
+        marginTop: 10, 
+        marginLeft: 10 
+    },
+    scrollView:{
+        padding:10
+    }
+
+})
