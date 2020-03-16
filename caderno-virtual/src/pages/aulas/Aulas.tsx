@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Image } from 'react-native';
+import { Image, TouchableOpacity, Text } from 'react-native';
 import { ListItem } from 'react-native-elements';
-import OverlayAulas from './OverlayAulas';
+import OverlayEditar from './OverlayEditar';
+import { MaterialIcons } from "@expo/vector-icons"
 
 import { sAulas } from './styles'
 import calendarIcon from '../../images/calendar.png'
@@ -49,18 +50,31 @@ const Materias: React.FC = () => {
   const [diaSelecionado, setDiaSelecionado] = useState<{id: string, name:string, subtitle:string} | null>(null);
   return (
     <>
-        {fakeData.map((dia, index) => (
+        {
+        fakeData.map((dia, index) => (
           <ListItem
-            style={sAulas.aulaScreen}
+            style={sAulas.listItem}
+            containerStyle={sAulas.listContainer}
             key={index}
             leftIcon={<Image style={sAulas.calendarIcon} source={calendarIcon} />}
-            title={dia.name}
-            subtitle={dia.subtitle}
-            onPress={() => setDiaSelecionado(dia)}
+            rightAvatar={
+              <TouchableOpacity style={sAulas.addButton} onPress={() => alert()}>
+                <MaterialIcons name="add" size={25} color="#FFF" />
+              </TouchableOpacity>
+            }
+            title={
+              <TouchableOpacity  
+                onPress={() => setDiaSelecionado(dia)}
+                style={sAulas.listTitleWrapper}
+              >
+                <Text style={sAulas.listTitle}>{dia.name}</Text>
+                <Text style={sAulas.listTitleSubtitle}>{dia.subtitle}</Text>
+              </TouchableOpacity>
+            }
             bottomDivider
           />
         ))}
-        <OverlayAulas
+      <OverlayEditar
           diaSelecionado={diaSelecionado}
           setDiaSelecionado={setDiaSelecionado}
         />

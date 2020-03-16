@@ -9,7 +9,7 @@ interface IProps {
   diaSelecionado: { id: string, name: string, subtitle: string }
 }
 
-const OverlayAulas: React.FC<IProps> = ({ diaSelecionado, setDiaSelecionado }) => {
+const OverlayEditar: React.FC<IProps> = ({ diaSelecionado, setDiaSelecionado }) => {
 
   return (
     <Overlay
@@ -37,4 +37,4 @@ const OverlayAulas: React.FC<IProps> = ({ diaSelecionado, setDiaSelecionado }) =
   )
 }
 
-export default OverlayAulas;
+export default OverlayEditar;
