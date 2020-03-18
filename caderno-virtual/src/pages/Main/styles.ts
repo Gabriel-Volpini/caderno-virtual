@@ -3,8 +3,11 @@ import {StyleSheet} from 'react-native';
 export const sMain = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#e8e8e8',
-        },
+        backgroundColor: '#E8E8E8',
+        alignItems: "center", 
+        justifyContent: "center",
+        position:"relative"
+    },
     
     button: {
       backgroundColor: "#7D40E7",

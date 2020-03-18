@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Blank Template (TypeScript)",
+    "name": "PhotoBook",
     "slug": "caderno-virtual",
     "privacy": "public",
     "sdkVersion": "36.0.0",
@@ -26,5 +26,9 @@
     "ios": {
       "supportsTablet": true
     }
+  },
+  "android": {
+    "package": "com.Volpini.PhotoBook",
+    "versionCode": 0
   }
 }
