@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -7,13 +7,18 @@ import { MaterialIcons } from "@expo/vector-icons"
 import Main from './pages/Main/Main';
 import Galeria from './pages/Galeria';
 import Aulas from './pages/aulas/Aulas';
+import { IAppContext, AppContext } from '../App';
 
 
 const Routes: React.FC = () => {
     const Stack = createStackNavigator();
+    const {
+        setModalCadastrarVisible
+    } = useContext<IAppContext>(AppContext);
+
 
     const iconCadastrar = () => (
-        <TouchableOpacity style={sNav.buttonCadastrar}>
+        <TouchableOpacity onPress={() => setModalCadastrarVisible(true)} style={sNav.buttonCadastrar}>
             <MaterialIcons name="add" size={25} color="#FFF" />
         </TouchableOpacity>
     )
