@@ -25,10 +25,10 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.Volpini.PhotoBook",
+      "versionCode": 0
     }
-  },
-  "android": {
-    "package": "com.Volpini.PhotoBook",
-    "versionCode": 0
   }
 }

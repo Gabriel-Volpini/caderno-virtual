@@ -1,6 +1,8 @@
 import React from 'react';
+import { TouchableOpacity, Text, StyleSheet } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { MaterialIcons } from "@expo/vector-icons"
 
 import Main from './pages/Main/Main';
 import Galeria from './pages/Galeria';
@@ -8,14 +10,20 @@ import Aulas from './pages/aulas/Aulas';
 
 
 const Routes: React.FC = () => {
-    const Stack = createStackNavigator(); 
+    const Stack = createStackNavigator();
+
+    const iconCadastrar = () => (
+        <TouchableOpacity style={sNav.buttonCadastrar}>
+            <MaterialIcons name="add" size={25} color="#FFF" />
+        </TouchableOpacity>
+    )
     return (
         <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen 
                     name="Main" 
                     component={Main}
-                    options={{ 
+                    options={{  
                         title: 'Menu', 
                         headerStyle: {
                             backgroundColor: '#7D40E7'
@@ -24,6 +32,8 @@ const Routes: React.FC = () => {
                         headerTitleStyle: {
                             fontWeight: 'bold',
                         }, 
+                        headerRight: iconCadastrar
+
                     }}  
                 />
                 <Stack.Screen 
@@ -37,7 +47,8 @@ const Routes: React.FC = () => {
                         headerTintColor: '#fff', 
                         headerTitleStyle: {
                             fontWeight: 'bold',
-                        }, 
+                        },  
+                        headerRight: iconCadastrar
                     }}  
                 />
                 <Stack.Screen 
@@ -52,6 +63,7 @@ const Routes: React.FC = () => {
                         headerTitleStyle: {
                             fontWeight: 'bold',
                         }, 
+                        headerRight: iconCadastrar
                     }}  
                 />
                 
@@ -61,3 +73,10 @@ const Routes: React.FC = () => {
 }
 
 export default Routes;
+
+export const sNav = StyleSheet.create({
+    buttonCadastrar:{
+        marginRight:10
+    },
+
+})
