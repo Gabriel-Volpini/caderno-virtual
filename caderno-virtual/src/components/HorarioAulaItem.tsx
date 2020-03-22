@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TouchableOpacity, Text, View } from 'react-native';
 import { sHorarioAulaItem } from './styles';
 import { FontAwesome } from "@expo/vector-icons"
+import DateTimePicker from '@react-native-community/datetimepicker';
+import moment from 'moment';
 
-const renderItem = ({ item }) => {
+const RenderItem = ({ dia }) => {
 
     const getFullName = (dia:string) => {
         switch(dia){
@@ -21,21 +23,55 @@ const renderItem = ({ item }) => {
                 return "Sábado";
             case "dom":
                 return "Domingo";
+            default:
+                return "undefined"
         }
     }
     
+    const [pickerInicalVisible, setPickerInicalVisible]=useState<string>(false);
+
+    const [horarioInicial, setHorarioInicial] = useState<string>("00:00");
+    const [horarioFinal, setHorarioFinal] = useState<string>();
+
+    const onTimeChange = (e, date) =>{
+        setPickerInicalVisible(false);
+
+        if(e.type === "set"){
+            setHorarioInicial(moment(date).format('H:mm'));
+        } 
+    }
+
     return(
-        <View style={sHorarioAulaItem.horarioBox} key={item.key}>
-            <Text style={sHorarioAulaItem.day}>{getFullName(item)}</Text>
+        <View style={sHorarioAulaItem.horarioBox} key={dia.key}>
+            <Text style={sHorarioAulaItem.day}>{getFullName(dia.item)}</Text>
 
             <View style={sHorarioAulaItem.textHorarioWrapper}>
-                <Text style={sHorarioAulaItem.horario}>00:00</Text>
+                <TouchableOpacity onPress={() => setPickerInicalVisible(true)}>
+                    <Text style={sHorarioAulaItem.horario}>{horarioInicial}</Text>
+                </TouchableOpacity>
+
                 <View style={{marginHorizontal:10, justifyContent:"center"}}>
                     <FontAwesome name="long-arrow-right" size={40} color="#D8BFD8"/>
                 </View>
-                <Text style={sHorarioAulaItem.horario}>00:00</Text>
+
+                <TouchableOpacity>
+                    <Text style={sHorarioAulaItem.horario}>00:00</Text>
+                </TouchableOpacity>
+
+                {
+                    pickerInicalVisible &&
+                    <DateTimePicker
+                        testID="dateTimePicker"
+                        timeZoneOffsetInMinutes={0}
+                        value={new Date()}
+                        mode={"time"}
+                        is24Hour={true}
+                        display="default"
+                        onChange={onTimeChange}
+                    />
+                }
             </View>
         </View>
     )
 }
-export default renderItem
+export default RenderItem;

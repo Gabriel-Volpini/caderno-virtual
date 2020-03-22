@@ -4,7 +4,7 @@ import { Overlay, Input } from 'react-native-elements';
 import { Entypo } from "@expo/vector-icons"
 import { sModalCadastrar } from './styles'
 import DiaSemanaItem from './DiaSemanaItem';
-import renderItem from './HorarioAulaItem';
+import RenderItem from './HorarioAulaItem';
 
 import { IAppContext, AppContext } from '../../App'
 
@@ -61,7 +61,7 @@ const ModalCadastrar: React.FC = () =>{
                     <FlatList
                         data={arrDiaSelecionado}
                         keyExtractor={(item, index) => index + ''}
-                        renderItem={renderItem}
+                        renderItem={(item) => <RenderItem dia={item}/>}
                         numColumns={1}
                     />
                 </View>
