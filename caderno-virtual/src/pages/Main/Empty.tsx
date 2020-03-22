@@ -15,7 +15,7 @@ const Empty:React.FC = () => {
         <>
             <Text style={sEmpty.text}>Nem uma matéria cadastrada</Text>
             <Image style={sEmpty.image} source={require("../../images/empty.png")} />
-            <TouchableOpacity style={sEmpty.button} onPress={() => setModalCadastrarVisible(true)}>
+            <TouchableOpacity activeOpacity={0.7} style={sEmpty.button} onPress={() => setModalCadastrarVisible(true)}>
                 <MaterialIcons name="add" size={20} color="#FFF" />
                 <Text style={sEmpty.buttonText}>
                     Cadastrar

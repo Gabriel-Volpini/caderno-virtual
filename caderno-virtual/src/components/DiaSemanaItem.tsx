@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { TouchableWithoutFeedback, Text } from 'react-native';
-import { sModalCadastrar } from './styles';
+import { sDiaSemanaItem } from './styles';
 
-const DiaSemanaItem = ({ dia, color, removerDia, adicionarDia}) =>{
+const DiaSemanaItem = ({ dia, color, setArrDiaSelecionado}) =>{
 
     const [selecionado, setSelecionado] = useState<boolean>(false);
     
 
     const selecionar = () => {
-        if (!selecionado) adicionarDia(dia);
-        else removerDia(dia);
+        if (!selecionado) setArrDiaSelecionado(currentState => [...currentState, dia]);
+        else setArrDiaSelecionado(currentState => currentState.filter(a => a !== dia));
         setSelecionado(selecionado => !selecionado);
     }
 
@@ -17,7 +17,7 @@ const DiaSemanaItem = ({ dia, color, removerDia, adicionarDia}) =>{
         <TouchableWithoutFeedback onPress={selecionar}>
             <Text
                 style={[
-                    sModalCadastrar.diaSemana,
+                    sDiaSemanaItem.diaSemana,
                     { color: selecionado ? color : "#A29C9C" }]}
             >
                 {dia}

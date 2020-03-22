@@ -1,9 +1,10 @@
-import React, { useContext, useState } from 'react';
-import { View, Button, TouchableOpacity, Text, TouchableWithoutFeedback } from 'react-native';
+import React, { useContext, useState, useEffect } from 'react';
+import { View, Button, TouchableOpacity, Text, FlatList } from 'react-native';
 import { Overlay, Input } from 'react-native-elements';
 import { Entypo } from "@expo/vector-icons"
 import { sModalCadastrar } from './styles'
 import DiaSemanaItem from './DiaSemanaItem';
+import renderItem from './HorarioAulaItem';
 
 import { IAppContext, AppContext } from '../../App'
 
@@ -14,16 +15,15 @@ const ModalCadastrar: React.FC = () =>{
         setModalCadastrarVisible
     } = useContext<IAppContext>(AppContext);
 
-    var arrNomeMateria = '';
-    var arrDiaSelecionado = [];
-
-    function adicionarDia(diaSelecionado){
-        arrDiaSelecionado.push(diaSelecionado)
+    var nomeMateria = '';
+    const [arrDiaSelecionado, setArrDiaSelecionado] = useState<Array<string>>([]);
+    
+    const onComponentClose = () => {
+        if (modaCadastrarVisible)return
+        setArrDiaSelecionado([]);
     }
+    useEffect(onComponentClose, [modaCadastrarVisible])
 
-    function removerDia(diaSelecionado){
-        arrDiaSelecionado = arrDiaSelecionado.filter(a => a !== diaSelecionado)
-    }
 
     return(
         <Overlay 
@@ -36,7 +36,7 @@ const ModalCadastrar: React.FC = () =>{
                 style={sModalCadastrar.overlayContent}
             >
                 <Input
-                    onChangeText={e => arrNomeMateria = e}                    
+                    onChangeText={e => nomeMateria = e}                    
                     placeholder='Matéria'
                     autoCapitalize="words"
                     leftIcon={
@@ -48,15 +48,25 @@ const ModalCadastrar: React.FC = () =>{
                         />}
                 />
                 <View style={sModalCadastrar.diaSemanaWrapper}>
-                    <DiaSemanaItem removerDia={removerDia} adicionarDia={adicionarDia} dia="dom" color="#CD3535"/>
-                    <DiaSemanaItem removerDia={removerDia} adicionarDia={adicionarDia} dia="seg" color="#35CD44"/>
-                    <DiaSemanaItem removerDia={removerDia} adicionarDia={adicionarDia} dia="ter" color="#DD22F9"/>
-                    <DiaSemanaItem removerDia={removerDia} adicionarDia={adicionarDia} dia="qua" color="#940EEE"/>
-                    <DiaSemanaItem removerDia={removerDia} adicionarDia={adicionarDia} dia="qui" color="#355ECD"/>
-                    <DiaSemanaItem removerDia={removerDia} adicionarDia={adicionarDia} dia="sex" color="#35A4CD"/>
-                    <DiaSemanaItem removerDia={removerDia} adicionarDia={adicionarDia} dia="sab" color="#77CD35"/>
+                    <DiaSemanaItem setArrDiaSelecionado={setArrDiaSelecionado} dia="dom" color="#CD3535"/>
+                    <DiaSemanaItem setArrDiaSelecionado={setArrDiaSelecionado} dia="seg" color="#940EEE"/>
+                    <DiaSemanaItem setArrDiaSelecionado={setArrDiaSelecionado} dia="ter" color="#940EEE"/>
+                    <DiaSemanaItem setArrDiaSelecionado={setArrDiaSelecionado} dia="qua" color="#940EEE"/>
+                    <DiaSemanaItem setArrDiaSelecionado={setArrDiaSelecionado} dia="qui" color="#940EEE"/>
+                    <DiaSemanaItem setArrDiaSelecionado={setArrDiaSelecionado} dia="sex" color="#940EEE"/>
+                    <DiaSemanaItem setArrDiaSelecionado={setArrDiaSelecionado} dia="sab" color="#77CD35"/>
                 </View>
-                <TouchableOpacity style={sModalCadastrar.buttonCadastrar} onPress={() => console.log(arrNomeMateria)}>
+                
+                <View style={sModalCadastrar.horarioWrapper}>
+                    <FlatList
+                        data={arrDiaSelecionado}
+                        keyExtractor={(item, index) => index + ''}
+                        renderItem={renderItem}
+                        numColumns={1}
+                    />
+                </View>
+
+                <TouchableOpacity activeOpacity={0.7} style={sModalCadastrar.buttonCadastrar} onPress={() => console.log(nomeMateria)}>
                     <Text style={sModalCadastrar.textCadastrar}>Cadastrar</Text>
                 </TouchableOpacity>
             </View>

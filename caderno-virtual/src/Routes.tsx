@@ -18,7 +18,7 @@ const Routes: React.FC = () => {
 
 
     const iconCadastrar = () => (
-        <TouchableOpacity onPress={() => setModalCadastrarVisible(true)} style={sNav.buttonCadastrar}>
+        <TouchableOpacity activeOpacity={0.7} onPress={() => setModalCadastrarVisible(true)} style={sNav.buttonCadastrar}>
             <MaterialIcons name="add" size={25} color="#FFF" />
         </TouchableOpacity>
     )
