@@ -63,7 +63,7 @@ export const sHorarioAulaItem = StyleSheet.create({
         borderRadius:5,
         alignItems:"center",
 
-        borderColor:"#DD22F9",
+        borderColor:"#DA70D6",
         borderWidth:1
     },
 
