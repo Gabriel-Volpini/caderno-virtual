@@ -28,17 +28,27 @@ const RenderItem = ({ dia }) => {
         }
     }
     
-    const [pickerInicalVisible, setPickerInicalVisible]=useState<string>(false);
-
+    const [pickerInicalVisible, setPickerInicalVisible]=useState<boolean>(false);
     const [horarioInicial, setHorarioInicial] = useState<string>("00:00");
-    const [horarioFinal, setHorarioFinal] = useState<string>();
+    
+    const [pickerFinalVisible, setPickerFinalVisible]=useState<boolean>(false);
+    const [horarioFinal, setHorarioFinal] = useState<string>("00:00");
 
-    const onTimeChange = (e, date) =>{
+    const onInicialTimeChange = (e, date) =>{
         setPickerInicalVisible(false);
+        setPickerFinalVisible(false);
 
         if(e.type === "set"){
             setHorarioInicial(moment(date).format('H:mm'));
-        } 
+        }
+    }
+    const onFinalTimeChange = (e, date) =>{
+        setPickerInicalVisible(false);
+        setPickerFinalVisible(false);
+
+        if (e.type === "set") {
+            setHorarioFinal(moment(date).format('H:mm'));
+        }
     }
 
     return(
@@ -54,8 +64,8 @@ const RenderItem = ({ dia }) => {
                     <FontAwesome name="long-arrow-right" size={40} color="#D8BFD8"/>
                 </View>
 
-                <TouchableOpacity>
-                    <Text style={sHorarioAulaItem.horario}>00:00</Text>
+                <TouchableOpacity onPress={() => setPickerFinalVisible(true)}>
+                    <Text style={sHorarioAulaItem.horario}>{horarioFinal}</Text>
                 </TouchableOpacity>
 
                 {
@@ -67,7 +77,19 @@ const RenderItem = ({ dia }) => {
                         mode={"time"}
                         is24Hour={true}
                         display="default"
-                        onChange={onTimeChange}
+                        onChange={onInicialTimeChange}
+                    />
+                }
+                {
+                    pickerFinalVisible &&
+                    <DateTimePicker
+                        testID="dateTimePicker"
+                        timeZoneOffsetInMinutes={0}
+                        value={new Date()}
+                        mode={"time"}
+                        is24Hour={true}
+                        display="default"
+                        onChange={onFinalTimeChange}
                     />
                 }
             </View>
