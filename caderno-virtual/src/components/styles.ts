@@ -69,7 +69,9 @@ export const sHorarioAulaItem = StyleSheet.create({
 
     day:{
         fontSize:15,
-        color: "#8E4DFF"
+        color: "#940eee",
+        fontWeight: "900",
+        textDecorationLine:"underline",
     },
     textHorarioWrapper:{
         flex:1,

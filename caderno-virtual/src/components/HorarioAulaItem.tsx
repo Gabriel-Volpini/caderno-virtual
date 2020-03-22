@@ -31,7 +31,7 @@ const renderItem = ({ item }) => {
             <View style={sHorarioAulaItem.textHorarioWrapper}>
                 <Text style={sHorarioAulaItem.horario}>00:00</Text>
                 <View style={{marginHorizontal:10, justifyContent:"center"}}>
-                    <FontAwesome name="long-arrow-right" size={40} color="#DD22F9"/>
+                    <FontAwesome name="long-arrow-right" size={40} color="#DA70D6"/>
                 </View>
                 <Text style={sHorarioAulaItem.horario}>00:00</Text>
             </View>
