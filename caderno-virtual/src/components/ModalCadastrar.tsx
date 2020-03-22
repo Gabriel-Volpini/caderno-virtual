@@ -25,7 +25,7 @@ const ModalCadastrar: React.FC = () =>{
             >
                 <Input
                     onChangeText={e => teste = e}                    
-                    placeholder='Matérias'
+                    placeholder='Matéria'
                     autoCapitalize="words"
                     leftIcon={
                         <Entypo 
