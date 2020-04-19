@@ -9,7 +9,39 @@ export const sListaMaterias = StyleSheet.create({
         position:"relative"
     },
     
+    listContainer: {
+        padding: 0,
+        height: 70,
+        paddingHorizontal: 15
+    },
     
+    addButton: {
+        backgroundColor: "#8E4DFF",
+        borderRadius: 25,
+        width: 35,
+        height: 35,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+
+    calendarIcon: {
+        width: 30,
+        height: 30
+    },
+
+    listTitleWrapper: {
+        flex: 1,
+        justifyContent: "center"
+    },
+
+    listTitle: {
+        fontSize: 18
+    },
+
+    listTitleSubtitle: {
+        fontSize: 13,
+        color: "grey"
+    },
 });
 
 export const sEmpty = StyleSheet.create({

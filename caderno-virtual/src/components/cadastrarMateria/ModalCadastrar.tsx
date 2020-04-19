@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { View, Button, TouchableOpacity, Text, FlatList } from 'react-native';
+import { View, ToastAndroid,  TouchableOpacity, Text, FlatList } from 'react-native';
 import { Overlay, Input } from 'react-native-elements';
 import { Entypo } from "@expo/vector-icons"
 import { sModalCadastrar } from './styles'
@@ -12,10 +12,11 @@ import useSetAsyncData from '../../hooks/useSetAsyncData';
 import getFullWeekName from '../../util/getFullWeekName';
 
 interface IDia {
-    nome: string,
+    dia: string,
     hrInicial: string,
     hrFinal: string
 }
+let nomeMateria = '';
 
 const ModalCadastrar: React.FC = () =>{
     const {
@@ -23,7 +24,6 @@ const ModalCadastrar: React.FC = () =>{
         setModalCadastrarVisible
     } = useContext<IAppContext>(AppContext);
 
-    var nomeMateria = '';
     const [arrDiaSelecionado, setArrDiaSelecionado] = useState<Array<IDia>>([]);
     
     const onComponentClose = () => {
@@ -32,16 +32,19 @@ const ModalCadastrar: React.FC = () =>{
     }
     useEffect(onComponentClose, [modaCadastrarVisible])
 
-    const CadastrarMateria = (nomeMateria: string) => {
+    const CadastrarMateria = (aa: string) => {
         let message = "";
+        
+        if(!nomeMateria.length)
+            return alert("O nome da matéria precisa ser preenchido")
 
         arrDiaSelecionado.forEach(diaSelecionado => {
             if (!diaSelecionado.hrFinal || !diaSelecionado.hrInicial){
-                message = `Horário de ${getFullWeekName(diaSelecionado.nome)} não inserido`
+                message = `Horário de ${getFullWeekName(diaSelecionado.dia)} não inserido`
             } else if (moment(diaSelecionado.hrFinal).isSame(diaSelecionado.hrInicial, 'minute')){ 
                 message = "A aula não podem começar e acabar no mesmo horario" 
             } else if (moment(diaSelecionado.hrInicial).isAfter(diaSelecionado.hrFinal)) {
-                message = `A aula de ${getFullWeekName(diaSelecionado.nome)} não pode começar antes de acabar` 
+                message = `A aula de ${getFullWeekName(diaSelecionado.dia)} não pode começar antes de acabar` 
             }
 
         })
@@ -50,10 +53,18 @@ const ModalCadastrar: React.FC = () =>{
             return alert(message)
         
         const dataToSync = {
+            nome: aa,
             horarios: arrDiaSelecionado
         }
-        // useSetAsyncData(nomeMateria, JSON.stringify(arrDiaSelecionado))
-        // setModalCadastrarVisible(false)
+        useSetAsyncData(nomeMateria, JSON.stringify(dataToSync))
+        setModalCadastrarVisible(false)
+        ToastAndroid.showWithGravityAndOffset(
+            'Matéria cadastrada com sucesso',
+            ToastAndroid.LONG,
+            ToastAndroid.BOTTOM,
+            25,
+            50
+        );
     }
 
     return(

@@ -82,3 +82,25 @@ const Materias: React.FC = () => {
   );
 }
 export default Materias;
+
+
+<ListItem
+  style={sListaMaterias.listItem}
+  containerStyle={sListaMaterias.listContainer}
+  key={index}
+  leftIcon={<Image style={sListaMaterias.calendarIcon} source={calendarIcon} />}
+  rightAvatar={
+    <TouchableOpacity style={sListaMaterias.addButton} onPress={() => alert('1')}>
+      {/* <MaterialIcons name="add" size={25} color="#FFF" /> */}
+    </TouchableOpacity>
+  }
+  title={
+    <TouchableOpacity
+      style={sListaMaterias.listTitleWrapper}
+    >
+      <Text style={sListaMaterias.listTitle}>{dia}</Text>
+      <Text style={sListaMaterias.listTitleSubtitle}>{dia}</Text>
+    </TouchableOpacity>
+  }
+  bottomDivider
+/>

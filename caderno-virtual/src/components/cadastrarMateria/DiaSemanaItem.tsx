@@ -8,8 +8,8 @@ const DiaSemanaItem = ({ dia, color, setArrDiaSelecionado}) =>{
     
 
     const selecionar = () => {
-        if (!selecionado) setArrDiaSelecionado(currentState => [...currentState, {nome: dia}]);
-        else setArrDiaSelecionado(currentState => currentState.filter(a => a.nome !== dia));
+        if (!selecionado) setArrDiaSelecionado(currentState => [...currentState, {dia: dia}]);
+        else setArrDiaSelecionado(currentState => currentState.filter(a => a.dia !== dia));
         setSelecionado(selecionado => !selecionado);
     }
 

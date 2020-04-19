@@ -21,9 +21,9 @@ const RenderItem = ({ dia, setArrDiaSelecionado, arrDiaSelecionado }) => {
         if(e.type === "set"){
             setHorarioInicial(moment(date).format('H:mm'));
 
-            const value = arrDiaSelecionado.find(a => a.nome === dia.item.nome)
+            const value = arrDiaSelecionado.find(a => a.dia === dia.item.dia)
             value.hrInicial = moment(date);
-            setArrDiaSelecionado(_.xorBy(value, arrDiaSelecionado, 'nome'))
+            setArrDiaSelecionado(_.xorBy(value, arrDiaSelecionado, 'dia'))
         }   
     }
 
@@ -34,15 +34,15 @@ const RenderItem = ({ dia, setArrDiaSelecionado, arrDiaSelecionado }) => {
         if (e.type === "set") {
             setHorarioFinal(moment(date).format('H:mm'));
 
-            const value = arrDiaSelecionado.find(a => a.nome === dia.item.nome)
+            const value = arrDiaSelecionado.find(a => a.dia === dia.item.dia)
             value.hrFinal = moment(date);
-            setArrDiaSelecionado(_.xorBy(value, arrDiaSelecionado, 'nome'))
+            setArrDiaSelecionado(_.xorBy(value, arrDiaSelecionado, 'dia'))
         }
     }
 
     return(
         <View style={sHorarioAulaItem.horarioBox} key={dia.key}>
-            <Text style={sHorarioAulaItem.day}>{getFullWeekName(dia.item.nome)}</Text>
+            <Text style={sHorarioAulaItem.day}>{getFullWeekName(dia.item.dia)}</Text>
 
             <View style={sHorarioAulaItem.textHorarioWrapper}>
                 <TouchableOpacity onPress={() => setPickerInicalVisible(true)}>
