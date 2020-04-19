@@ -24,9 +24,9 @@ export const sListaMaterias = StyleSheet.create({
         justifyContent: "center",
     },
 
-    calendarIcon: {
-        width: 30,
-        height: 30
+    bookIcon: {
+        width: 50,
+        height: 50
     },
 
     listTitleWrapper: {
