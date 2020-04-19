@@ -30,7 +30,7 @@ const Routes: React.FC = () => {
                     name="Main" 
                     component={Main}
                     options={{  
-                        title: 'Menu', 
+                        title: 'Menu',
                         headerStyle: {
                             backgroundColor: '#7D40E7'
                         }, 
