@@ -15,7 +15,7 @@ const Main = ({ navigation }) => {
     }
 
     const novaFoto = () => {
-        navigation.navigate("Camera")
+        navigation.navigate("NovaFoto")
     }
 
     const materias = () => {

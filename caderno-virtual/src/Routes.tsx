@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialIcons } from "@expo/vector-icons"
 
 import ListaMaterias from './pages/ListaMaterias/ListaMaterias';
-import Camera from './pages/Camera/CameraControl'
+import NovaFoto from './pages/NovaFoto/NovaFoto'
 import Galeria from './pages/Galeria/Galeria';
 import Main from './pages/Main/Main'
 import { IAppContext, AppContext } from '../App';
@@ -62,7 +62,7 @@ const Routes: React.FC = () => {
                     name='Galeria'  
                     component={Galeria}   
                     options={{
-                        title: 'Galeria',
+                        title: 'Suas matérias',
                         headerStyle: {
                             backgroundColor: '#7D40E7'
                         },
@@ -75,13 +75,12 @@ const Routes: React.FC = () => {
                     }} 
                 />
                 <Stack.Screen 
-                    name="Camera" 
-                    component={Camera} 
+                    name="NovaFoto" 
+                    component={NovaFoto} 
                     options={{
                         title: 'Câmera',
-                        headerTransparent: true,
                         headerStyle: {
-                            backgroundColor: 'transparent',
+                            backgroundColor: '#7D40E7',
                         },
                         headerTintColor: '#fff',
                         headerTitleStyle: {
