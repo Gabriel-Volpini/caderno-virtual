@@ -37,6 +37,7 @@ const CameraControl: React.FC<IProps> = ({ setCameraVisible }) => {
 				zoom={zoom}
 				ratio={'16:9'}
 				style={{ flex: 1 }}
+				flashMode={flash}
 				type={type}
 			>
 				<View
@@ -95,7 +96,9 @@ const CameraControl: React.FC<IProps> = ({ setCameraVisible }) => {
 								<FontAwesome
 									name= 'bolt'
 									size= {30}
-									color='#FFF'
+								color={flash === Camera.Constants.FlashMode.on
+									? '#FFF'
+									: '#333'}
 								/>
 						</TouchableOpacity>
 						<TouchableOpacity activeOpacity={0.7} onPress={async () => {
