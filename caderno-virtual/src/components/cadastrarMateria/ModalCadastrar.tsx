@@ -5,8 +5,11 @@ import { Entypo } from "@expo/vector-icons"
 import { sModalCadastrar } from './styles'
 import DiaSemanaItem from './DiaSemanaItem';
 import RenderItem from './HorarioAulaItem';
+import moment from 'moment';
 
 import { IAppContext, AppContext } from '../../../App'
+import useSetAsyncData from '../../hooks/useSetAsyncData';
+import getFullWeekName from '../../util/getFullWeekName';
 
 interface IDia {
     nome: string,
@@ -30,8 +33,27 @@ const ModalCadastrar: React.FC = () =>{
     useEffect(onComponentClose, [modaCadastrarVisible])
 
     const CadastrarMateria = (nomeMateria: string) => {
-        // console.log(nomeMateria)
-        console.log(arrDiaSelecionado)
+        let message = "";
+
+        arrDiaSelecionado.forEach(diaSelecionado => {
+            if (!diaSelecionado.hrFinal || !diaSelecionado.hrInicial){
+                message = `Horário de ${getFullWeekName(diaSelecionado.nome)} não inserido`
+            } else if (moment(diaSelecionado.hrFinal).isSame(diaSelecionado.hrInicial, 'minute')){ 
+                message = "A aula não podem começar e acabar no mesmo horario" 
+            } else if (moment(diaSelecionado.hrInicial).isAfter(diaSelecionado.hrFinal)) {
+                message = `A aula de ${getFullWeekName(diaSelecionado.nome)} não pode começar antes de acabar` 
+            }
+
+        })
+
+        if (message.length)
+            return alert(message)
+        
+        const dataToSync = {
+            horarios: arrDiaSelecionado
+        }
+        // useSetAsyncData(nomeMateria, JSON.stringify(arrDiaSelecionado))
+        // setModalCadastrarVisible(false)
     }
 
     return(

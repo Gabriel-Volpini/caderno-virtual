@@ -5,30 +5,9 @@ import { FontAwesome } from "@expo/vector-icons"
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import _ from 'lodash';
+import getFullWeekName from '../../util/getFullWeekName';
 
 const RenderItem = ({ dia, setArrDiaSelecionado, arrDiaSelecionado }) => {
-
-    const getFullName = (dia:{nome: string}) => {
-        switch(dia.nome){
-            case "seg":
-                return "Segunda-Feira";
-            case "ter":
-                return "Terça-Feira";
-            case "qua":
-                return "Quarta-Feira";
-            case "qui":
-                return "Quinta-Feira";
-            case "sex":
-                return "Sexta-Feira";
-            case "sab":
-                return "Sábado";
-            case "dom":
-                return "Domingo";
-            default:
-                return "undefined"
-        }
-    }
-    
     const [pickerInicalVisible, setPickerInicalVisible]=useState<boolean>(false);
     const [horarioInicial, setHorarioInicial] = useState<string>("00:00");
     
@@ -63,7 +42,7 @@ const RenderItem = ({ dia, setArrDiaSelecionado, arrDiaSelecionado }) => {
 
     return(
         <View style={sHorarioAulaItem.horarioBox} key={dia.key}>
-            <Text style={sHorarioAulaItem.day}>{getFullName(dia.item)}</Text>
+            <Text style={sHorarioAulaItem.day}>{getFullWeekName(dia.item.nome)}</Text>
 
             <View style={sHorarioAulaItem.textHorarioWrapper}>
                 <TouchableOpacity onPress={() => setPickerInicalVisible(true)}>

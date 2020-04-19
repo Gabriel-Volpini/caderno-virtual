@@ -4,10 +4,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { MaterialIcons } from "@expo/vector-icons"
 
-import Main from './pages/Main/Main';
-import Galeria from './pages/Galeria';
-import Aulas from './pages/aulas/Aulas';
+import ListaMaterias from './pages/ListaMaterias/ListaMaterias';
 import Camera from './pages/Camera/CameraControl'
+import Main from './pages/Main/Main'
 import { IAppContext, AppContext } from '../App';
 
 
@@ -30,7 +29,7 @@ const Routes: React.FC = () => {
                     name="Main" 
                     component={Main}
                     options={{  
-                        title: 'Menu',
+                        title: 'Painel',
                         headerStyle: {
                             backgroundColor: '#7D40E7'
                         }, 
@@ -43,25 +42,10 @@ const Routes: React.FC = () => {
                     }}  
                 />
                 <Stack.Screen 
-                    name="Galeria" 
-                    component={Galeria}
-                    options={{ 
-                        title: 'Galeria', 
-                        headerStyle: {
-                            backgroundColor: '#7D40E7'
-                        }, 
-                        headerTintColor: '#fff', 
-                        headerTitleStyle: {
-                            fontWeight: 'bold',
-                        },  
-                        headerRight: iconCadastrar
-                    }}  
-                />
-                <Stack.Screen 
-                    name="Aulas" 
-                    component={Aulas}
-                    options={{ 
-                        title: 'Cadastrar', 
+                    name="ListaMaterias" 
+                    component={ListaMaterias}
+                    options={{  
+                        title: 'Suas matérias',
                         headerStyle: {
                             backgroundColor: '#7D40E7'
                         }, 
@@ -70,6 +54,7 @@ const Routes: React.FC = () => {
                             fontWeight: 'bold',
                         }, 
                         headerRight: iconCadastrar
+
                     }}  
                 />
                 <Stack.Screen 
