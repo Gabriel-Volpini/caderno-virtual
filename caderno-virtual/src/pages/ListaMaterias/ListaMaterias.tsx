@@ -38,7 +38,7 @@ const ListaMaterias: React.FC = ({ navigation }) => {
 								key={index}
 								leftIcon={<Image style={sListaMaterias.bookIcon} source={bookIcon} />}
 								rightAvatar={
-									<TouchableOpacity style={sListaMaterias.addButton} onPress={() => alert('1')}>
+									<TouchableOpacity style={sListaMaterias.addButton} onPress={() => setMateriaToEdit(materia)}>
 										<FontAwesome5 name="pencil-alt" size={18} color="#FFF" />
 									</TouchableOpacity>
 								}
@@ -59,7 +59,7 @@ const ListaMaterias: React.FC = ({ navigation }) => {
 						<Empty />
 					</View>
 			}
-			{/* <ModalEditar item={materiaToEdit} seteItem={setMateriaToEdit}/> */}
+			<ModalEditar item={materiaToEdit} setItem={setMateriaToEdit}/>
 		</ScrollView>
 	);
 }

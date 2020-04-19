@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { TouchableWithoutFeedback, Text } from 'react-native';
 import { sDiaSemanaItem } from './styles';
 
-const DiaSemanaItem = ({ dia, color, setArrDiaSelecionado}) =>{
+const DiaSemanaItem = ({ dia, color, setArrDiaSelecionado,}) =>{
 
     const [selecionado, setSelecionado] = useState<boolean>(false);
     

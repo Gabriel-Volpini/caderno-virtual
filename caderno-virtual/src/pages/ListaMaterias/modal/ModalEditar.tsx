@@ -70,11 +70,13 @@ const ModalCadastrar: React.FC = ({item, setItem}) =>{
             width="90%"
             height={"90%"}
         >
+            { !!item ?
             <View
                 style={sModalCadastrar.overlayContent}
             >
                 <Input
-                    onChangeText={e => nomeMateria = e}                    
+                    value={item.nome}
+                    onChangeText={e => setItem({...item, nome: e})}                    
                     placeholder='Matéria'
                     autoCapitalize="words"
                     leftIcon={
@@ -108,6 +110,8 @@ const ModalCadastrar: React.FC = ({item, setItem}) =>{
                     <Text style={sModalCadastrar.textCadastrar}>Cadastrar</Text>
                 </TouchableOpacity>
             </View>
+            : null
+         }
         </Overlay>
     )
 }
