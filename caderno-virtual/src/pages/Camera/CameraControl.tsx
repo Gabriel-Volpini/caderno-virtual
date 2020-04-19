@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useReducer } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Camera } from 'expo-camera';
 import { FontAwesome } from '@expo/vector-icons';
@@ -12,7 +12,10 @@ interface IProps {
 const CameraControl: React.FC<IProps> = ({ setCameraVisible }) => {
 	const [hasPermission, setHasPermission] = useState(null);
 	const [type, setType] = useState(Camera.Constants.Type.back);
-	const [zoom, setZoom] = useState<number>(0)
+	const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
+	const [zoom, setZoom] = useState<number>(0);
+	const [cameraRef, setCameraRef] = useState(null);
+
 	useEffect(() => {
 		(async () => {
 			const { status } = await Camera.requestPermissionsAsync();
@@ -30,25 +33,15 @@ const CameraControl: React.FC<IProps> = ({ setCameraVisible }) => {
 	return (
 		<View style={sCamera.content}>
 			<Camera
+				ref={ref => setCameraRef(ref)}
 				zoom={zoom}
-				ratio={'4:3'}
+				ratio={'16:9'}
 				style={{ flex: 1 }}
+				flashMode={flash}
 				type={type}
 			>
 				<View
 					style={sCamera.cameraScreen}>
-					<TouchableOpacity
-						style={sCamera.flipButton}
-						onPress={() => {
-							setType(
-								type === Camera.Constants.Type.back
-									? Camera.Constants.Type.front
-									: Camera.Constants.Type.back
-							);
-						}}>
-						<Text style={sCamera.flipText}> Flip </Text>
-					</TouchableOpacity>
-
 					<View style={sCamera.zoomWrapper}>
 						<TouchableOpacity
 							onPress={() => setZoom((currentZoom) => {
@@ -74,6 +67,51 @@ const CameraControl: React.FC<IProps> = ({ setCameraVisible }) => {
 								size={35}
 								color='#FFF'
 							/>
+						</TouchableOpacity>
+					</View>
+					<View style={sCamera.cameraBottomWrapper}>
+						<TouchableOpacity
+							style={sCamera.flipButton}
+							onPress={() => {
+								setType(
+									type === Camera.Constants.Type.back
+										? Camera.Constants.Type.front
+										: Camera.Constants.Type.back
+								);
+							}}>
+							<FontAwesome
+								name='random'
+								size={30}
+								color='#FFF'
+
+							/>
+						</TouchableOpacity>
+						<TouchableOpacity style={sCamera.flashButton} onPress={() => {
+							setFlash(
+								flash === Camera.Constants.FlashMode.on
+									? Camera.Constants.FlashMode.off
+									: Camera.Constants.FlashMode.on
+							);
+							}}>
+								<FontAwesome
+									name= 'bolt'
+									size= {30}
+								color={flash === Camera.Constants.FlashMode.on
+									? '#FFF'
+									: '#333'}
+								/>
+						</TouchableOpacity>
+						<TouchableOpacity activeOpacity={0.7} onPress={async () => {
+							if (cameraRef) {
+								let photo = await cameraRef.takePictureAsync();
+								console.log('photo', photo);
+							}
+						}}>
+							<View
+							style={sCamera.cameraButton}
+							>
+								<FontAwesome name='camera' size={30} color="#333" />
+							</View>
 						</TouchableOpacity>
 					</View>
 				</View>
