@@ -4,11 +4,12 @@ import { sHorarioAulaItem } from './styles';
 import { FontAwesome } from "@expo/vector-icons"
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
+import _ from 'lodash';
 
-const RenderItem = ({ dia }) => {
+const RenderItem = ({ dia, setArrDiaSelecionado, arrDiaSelecionado }) => {
 
-    const getFullName = (dia:string) => {
-        switch(dia){
+    const getFullName = (dia:{nome: string}) => {
+        switch(dia.nome){
             case "seg":
                 return "Segunda-Feira";
             case "ter":
@@ -40,14 +41,23 @@ const RenderItem = ({ dia }) => {
 
         if(e.type === "set"){
             setHorarioInicial(moment(date).format('H:mm'));
-        }
+
+            const value = arrDiaSelecionado.find(a => a.nome === dia.item.nome)
+            value.hrInicial = moment(date);
+            setArrDiaSelecionado(_.xorBy(value, arrDiaSelecionado, 'nome'))
+        }   
     }
+
     const onFinalTimeChange = (e, date) =>{
         setPickerInicalVisible(false);
         setPickerFinalVisible(false);
 
         if (e.type === "set") {
             setHorarioFinal(moment(date).format('H:mm'));
+
+            const value = arrDiaSelecionado.find(a => a.nome === dia.item.nome)
+            value.hrFinal = moment(date);
+            setArrDiaSelecionado(_.xorBy(value, arrDiaSelecionado, 'nome'))
         }
     }
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, createContext } from 'react';
 import { StatusBar } from "react-native"
 import Routes from './src/Routes'
-import ModalCadastrar from './src/components/ModalCadastrar'
+import ModalCadastrar from './src/components/cadastrarMateria/ModalCadastrar'
 
 //@ts-ignore
 export const AppContext = createContext(null);

@@ -6,8 +6,13 @@ import { sModalCadastrar } from './styles'
 import DiaSemanaItem from './DiaSemanaItem';
 import RenderItem from './HorarioAulaItem';
 
-import { IAppContext, AppContext } from '../../App'
+import { IAppContext, AppContext } from '../../../App'
 
+interface IDia {
+    nome: string,
+    hrInicial: string,
+    hrFinal: string
+}
 
 const ModalCadastrar: React.FC = () =>{
     const {
@@ -16,7 +21,7 @@ const ModalCadastrar: React.FC = () =>{
     } = useContext<IAppContext>(AppContext);
 
     var nomeMateria = '';
-    const [arrDiaSelecionado, setArrDiaSelecionado] = useState<Array<string>>([]);
+    const [arrDiaSelecionado, setArrDiaSelecionado] = useState<Array<IDia>>([]);
     
     const onComponentClose = () => {
         if (modaCadastrarVisible)return
@@ -24,6 +29,10 @@ const ModalCadastrar: React.FC = () =>{
     }
     useEffect(onComponentClose, [modaCadastrarVisible])
 
+    const CadastrarMateria = (nomeMateria: string) => {
+        // console.log(nomeMateria)
+        console.log(arrDiaSelecionado)
+    }
 
     return(
         <Overlay 
@@ -61,12 +70,12 @@ const ModalCadastrar: React.FC = () =>{
                     <FlatList
                         data={arrDiaSelecionado}
                         keyExtractor={(item, index) => index + ''}
-                        renderItem={(item) => <RenderItem dia={item}/>}
+                        renderItem={(item) => <RenderItem arrDiaSelecionado={arrDiaSelecionado} setArrDiaSelecionado={setArrDiaSelecionado}  dia={item}/>}
                         numColumns={1}
                     />
                 </View>
 
-                <TouchableOpacity activeOpacity={0.7} style={sModalCadastrar.buttonCadastrar} onPress={() => console.log(nomeMateria)}>
+                <TouchableOpacity activeOpacity={0.7} style={sModalCadastrar.buttonCadastrar} onPress={() => CadastrarMateria(nomeMateria)}>
                     <Text style={sModalCadastrar.textCadastrar}>Cadastrar</Text>
                 </TouchableOpacity>
             </View>
