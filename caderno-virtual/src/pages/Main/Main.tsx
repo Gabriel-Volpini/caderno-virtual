@@ -21,6 +21,9 @@ const Main = ({ navigation }) => {
     const materias = () => {
         navigation.navigate("ListaMaterias")
     }
+    const galeria = () => {
+        navigation.navigate("Galeria")
+    }
 
     return(
         <View style={sMain.container}>
@@ -51,9 +54,9 @@ const Main = ({ navigation }) => {
                     </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity activeOpacity={0.7} style={sMain.item} >
+                <TouchableOpacity activeOpacity={0.7} style={sMain.item} onPress={galeria} >
                     <View style={sMain.itemTextWrapper}>
-                        <Text style={sMain.itemText}>galeria</Text>
+                        <Text style={sMain.itemText}>Galeria</Text>
                     </View>
                 </TouchableOpacity>
 

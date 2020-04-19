@@ -51,7 +51,6 @@ const CameraControl: React.FC<IProps> = ({ setCameraVisible }) => {
 
 					<View style={sCamera.zoomWrapper}>
 						<TouchableOpacity
-							style={sCamera.zoomIn}
 							onPress={() => setZoom((currentZoom) => {
 								if (currentZoom === 1)
 									return 1
@@ -65,7 +64,6 @@ const CameraControl: React.FC<IProps> = ({ setCameraVisible }) => {
 						</TouchableOpacity>
 
 						<TouchableOpacity
-							style={sCamera.zoomOut}
 							onPress={() => setZoom((currentZoom) => {
 								if (currentZoom === 0)
 									return 0

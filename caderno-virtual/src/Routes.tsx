@@ -6,6 +6,7 @@ import { MaterialIcons } from "@expo/vector-icons"
 
 import ListaMaterias from './pages/ListaMaterias/ListaMaterias';
 import Camera from './pages/Camera/CameraControl'
+import Galeria from './pages/Galeria/Galeria';
 import Main from './pages/Main/Main'
 import { IAppContext, AppContext } from '../App';
 
@@ -56,6 +57,22 @@ const Routes: React.FC = () => {
                         headerRight: iconCadastrar
 
                     }}  
+                />
+                <Stack.Screen
+                    name='Galeria'  
+                    component={Galeria}   
+                    options={{
+                        title: 'Galeria',
+                        headerStyle: {
+                            backgroundColor: '#7D40E7'
+                        },
+                        headerTintColor: '#fff',
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                        },
+                        headerRight: iconCadastrar
+
+                    }} 
                 />
                 <Stack.Screen 
                     name="Camera" 
