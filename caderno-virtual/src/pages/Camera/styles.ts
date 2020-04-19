@@ -1,6 +1,11 @@
 import {StyleSheet} from 'react-native';
 
 export const sCamera = StyleSheet.create({
+    content: {
+        flex: 1,
+        position: 'relative',
+    },
+
     cameraScreen: {
         flex: 1,
         backgroundColor: 'transparent',
@@ -17,14 +22,28 @@ export const sCamera = StyleSheet.create({
         color: 'white'
     },
 
-    closeButton:{
-        alignSelf: 'flex-end',
+    zoomWrapper:{
+        position: 'absolute',
+        bottom: '50%',
+        right: 15,
         alignItems: 'center',
-        marginLeft:30
-    },
-    closeText:{
-        fontSize: 18, 
-        marginBottom: 10, 
-        color: 'white'
+        justifyContent: 'space-between',
+        height: 90,
     },
 });
+
+
+
+
+// zoomInText: {
+//     fontSize: 18,
+//         marginBottom: 10,
+//             color: 'white',
+    
+//     },
+
+// zoomOutText: {
+//     fontSize: 25,
+//         marginBottom: 10,
+//             color: 'white',
+//     },

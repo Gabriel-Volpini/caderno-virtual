@@ -74,7 +74,18 @@ const Routes: React.FC = () => {
                 />
                 <Stack.Screen 
                     name="Camera" 
-                    component={Camera}
+                    component={Camera} 
+                    options={{
+                        title: 'Câmera',
+                        headerTransparent: true,
+                        headerStyle: {
+                            backgroundColor: 'transparent',
+                        },
+                        headerTintColor: '#fff',
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                        }, 
+                    }}
                 />
                 
             </Stack.Navigator>
