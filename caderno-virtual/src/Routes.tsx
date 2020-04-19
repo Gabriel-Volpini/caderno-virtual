@@ -7,6 +7,7 @@ import { MaterialIcons } from "@expo/vector-icons"
 import Main from './pages/Main/Main';
 import Galeria from './pages/Galeria';
 import Aulas from './pages/aulas/Aulas';
+import Camera from './pages/Camera/CameraControl'
 import { IAppContext, AppContext } from '../App';
 
 
@@ -14,7 +15,7 @@ const Routes: React.FC = () => {
     const Stack = createStackNavigator();
     const {
         setModalCadastrarVisible
-    } = useContext<IAppContext>(AppContext);
+    } = useContext<IAppContext>(AppContext); 
 
 
     const iconCadastrar = () => (
@@ -70,6 +71,10 @@ const Routes: React.FC = () => {
                         }, 
                         headerRight: iconCadastrar
                     }}  
+                />
+                <Stack.Screen 
+                    name="Camera" 
+                    component={Camera}
                 />
                 
             </Stack.Navigator>
