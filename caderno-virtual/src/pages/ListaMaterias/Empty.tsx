@@ -14,7 +14,7 @@ const Empty:React.FC = ({ navigation }) => {
 
     return(
         <>
-            <Text style={sEmpty.text}>Nem uma matéria cadastrada</Text>
+            <Text style={sEmpty.text}>Nenhuma matéria cadastrada</Text>
             <Image style={sEmpty.image} source={require("../../images/empty.png")} />
             <TouchableOpacity activeOpacity={0.7} style={sEmpty.button} onPress={() => setModalCadastrarVisible(true)}>
                 <MaterialIcons name="add" size={20} color="#FFF" />

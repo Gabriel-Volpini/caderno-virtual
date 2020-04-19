@@ -89,7 +89,6 @@ export default CameraControl;
 /*
 Desisticar a camera
 conseguir tirar foto
-	cortar foto (! procura lib pronta)
-	manipular zoom
+cortar foto (! procura lib pronta)
 salvar foto na galeria E no app
 */
