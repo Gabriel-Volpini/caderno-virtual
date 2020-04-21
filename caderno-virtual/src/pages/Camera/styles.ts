@@ -45,12 +45,18 @@ export const sCamera = StyleSheet.create({
     flashButton: {
         position: 'absolute',
         left: 25,
-        bottom: 60,
+        bottom: 15,
     },
 
     flipButton: {
         position: 'absolute',
-        left: 20,
+        right: 20,
+        top: 15,
+    },
+
+    Gallery: {
+        position: 'absolute',
+        right: 20,
         bottom: 15,
     },
 

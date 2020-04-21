@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useRef, useReducer } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity,Image } from 'react-native';
 import { Camera } from 'expo-camera';
 import { FontAwesome } from '@expo/vector-icons';
+import { Constants } from 'expo-constants'
+import * as Permissions from 'expo-permissions'
+import * as ImagePicker from 'expo-image-picker'
 
 import { sCamera } from "./styles"
+import { State } from 'react-native-gesture-handler'
 
 interface IProps {
 	setCameraVisible: React.Dispatch<React.SetStateAction<boolean>>,
@@ -15,6 +19,21 @@ const CameraControl: React.FC<IProps> = ({ setCameraVisible }) => {
 	const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
 	const [zoom, setZoom] = useState<number>(0);
 	const [cameraRef, setCameraRef] = useState(null);
+	const _pickImage = async () => {
+		try {
+			let result = await ImagePicker.launchImageLibraryAsync({
+				mediaTypes: ImagePicker.MediaTypeOptions.All,
+				allowsEditing: true,
+				quality: 1,
+			});
+			if (!result.cancelled) {
+				this.setState({ image: result.uri });
+			}
+
+			console.log(result);
+		} catch (E) {
+			console.log(E);
+		}}
 
 	useEffect(() => {
 		(async () => {
@@ -42,6 +61,22 @@ const CameraControl: React.FC<IProps> = ({ setCameraVisible }) => {
 			>
 				<View
 					style={sCamera.cameraScreen}>
+					<TouchableOpacity
+						style={sCamera.flipButton}
+						onPress={() => {
+							setType(
+								type === Camera.Constants.Type.back
+									? Camera.Constants.Type.front
+									: Camera.Constants.Type.back
+							);
+						}}>
+						<FontAwesome
+							name='random'
+							size={30}
+							color='#FFF'
+
+						/>
+					</TouchableOpacity>
 					<View style={sCamera.zoomWrapper}>
 						<TouchableOpacity
 							onPress={() => setZoom((currentZoom) => {
@@ -70,22 +105,6 @@ const CameraControl: React.FC<IProps> = ({ setCameraVisible }) => {
 						</TouchableOpacity>
 					</View>
 					<View style={sCamera.cameraBottomWrapper}>
-						<TouchableOpacity
-							style={sCamera.flipButton}
-							onPress={() => {
-								setType(
-									type === Camera.Constants.Type.back
-										? Camera.Constants.Type.front
-										: Camera.Constants.Type.back
-								);
-							}}>
-							<FontAwesome
-								name='random'
-								size={30}
-								color='#FFF'
-
-							/>
-						</TouchableOpacity>
 						<TouchableOpacity style={sCamera.flashButton} onPress={() => {
 							setFlash(
 								flash === Camera.Constants.FlashMode.on
@@ -112,6 +131,9 @@ const CameraControl: React.FC<IProps> = ({ setCameraVisible }) => {
 							>
 								<FontAwesome name='camera' size={30} color="#333" />
 							</View>
+						</TouchableOpacity>
+						<TouchableOpacity activeOpacity={0.7} style={sCamera.Gallery} onPress={_pickImage}>
+							<FontAwesome name='image' size={30} color='#FFF'/>
 						</TouchableOpacity>
 					</View>
 				</View>
