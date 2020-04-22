@@ -6,6 +6,25 @@ export const sCamera = StyleSheet.create({
         position: 'relative',
     },
 
+    photo: {
+        flex: 1,
+        width: '100%',
+        height: '100%',
+        resizeMode: 'stretch',
+    },
+
+    cancel: {
+        position: 'absolute',
+        left: 25,
+        bottom: 15,
+    },
+
+    confirm: {
+        position: 'absolute',
+        bottom: 20,
+        right: 25,
+    },
+
     cameraScreen: {
         flex: 1,
         backgroundColor: 'transparent',

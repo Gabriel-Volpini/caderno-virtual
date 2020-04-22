@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useReducer } from 'react';
-import { View, Text, TouchableOpacity,Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { Camera } from 'expo-camera';
 import { FontAwesome } from '@expo/vector-icons';
 import { Constants } from 'expo-constants'
@@ -19,6 +19,7 @@ const CameraControl: React.FC<IProps> = ({ setCameraVisible }) => {
 	const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
 	const [zoom, setZoom] = useState<number>(0);
 	const [cameraRef, setCameraRef] = useState(null);
+	const [pictureTaken, setPictureTaken] = useState(null);
 	const _pickImage = async () => {
 		try {
 			let result = await ImagePicker.launchImageLibraryAsync({
@@ -41,6 +42,9 @@ const CameraControl: React.FC<IProps> = ({ setCameraVisible }) => {
 			setHasPermission(status === 'granted');
 		})();
 	}, []);
+	const cancelPicture = ()=> {
+		setPictureTaken (null);
+	}
 
 	if (hasPermission === null) {
 		return <View />;
@@ -50,102 +54,119 @@ const CameraControl: React.FC<IProps> = ({ setCameraVisible }) => {
 	}
 
 	return (
-		<View style={sCamera.content}>
-			<Camera
-				ref={ref => setCameraRef(ref)}
-				zoom={zoom}
-				ratio={'16:9'}
-				style={{ flex: 1 }}
-				flashMode={flash}
-				type={type}
-			>
-				<View
-					style={sCamera.cameraScreen}>
-					<TouchableOpacity
-						style={sCamera.flipButton}
-						onPress={() => {
-							setType(
-								type === Camera.Constants.Type.back
-									? Camera.Constants.Type.front
-									: Camera.Constants.Type.back
-							);
-						}}>
-						<FontAwesome
-							name='random'
-							size={30}
-							color='#FFF'
+		pictureTaken === null
 
-						/>
-					</TouchableOpacity>
-					<View style={sCamera.zoomWrapper}>
+			? <View style={sCamera.content}>
+				<Camera
+					ref={ref => setCameraRef(ref)}
+					zoom={zoom}
+					ratio={'16:9'}
+					style={{ flex: 1 }}
+					flashMode={flash}
+					type={type}
+				>
+					<View
+						style={sCamera.cameraScreen}>
 						<TouchableOpacity
-							onPress={() => setZoom((currentZoom) => {
-								if (currentZoom === 1)
-									return 1
-								else return currentZoom + 0.1
-							})}>
+							style={sCamera.flipButton}
+							onPress={() => {
+								setType(
+									type === Camera.Constants.Type.back
+										? Camera.Constants.Type.front
+										: Camera.Constants.Type.back
+								);
+							}}>
 							<FontAwesome
-								name='search-plus'
-								size={35}
-								color='#FFF'
-							/>
-						</TouchableOpacity>
-
-						<TouchableOpacity
-							onPress={() => setZoom((currentZoom) => {
-								if (currentZoom === 0)
-									return 0
-								else return currentZoom - 0.1
-							})}>
-							<FontAwesome
-								name='search-minus'
-								size={35}
-								color='#FFF'
-							/>
-						</TouchableOpacity>
-					</View>
-					<View style={sCamera.cameraBottomWrapper}>
-						<TouchableOpacity style={sCamera.flashButton} onPress={() => {
-							setFlash(
-								flash === Camera.Constants.FlashMode.on
-									? Camera.Constants.FlashMode.off
-									: Camera.Constants.FlashMode.on
-							);
-						}}>
-							<FontAwesome
-								name='bolt'
+								name='random'
 								size={30}
-								color={flash === Camera.Constants.FlashMode.on
-									? '#FFF'
-									: '#333'}
+								color='#FFF'
+
 							/>
 						</TouchableOpacity>
-						<TouchableOpacity activeOpacity={0.7} onPress={async () => {
-							if (cameraRef) {
-								let photo = await cameraRef.takePictureAsync();
-								console.log('photo', photo);
-							}
-						}}>
-							<View
-								style={sCamera.cameraButton}
-							>
-								<FontAwesome name='camera' size={30} color="#333" />
-							</View>
-						</TouchableOpacity>
-						<TouchableOpacity activeOpacity={0.7} style={sCamera.Gallery} onPress={_pickImage}>
-							<FontAwesome name='image' size={30} color='#FFF'/>
-						</TouchableOpacity>
+						<View style={sCamera.zoomWrapper}>
+							<TouchableOpacity
+								onPress={() => setZoom((currentZoom) => {
+									if (currentZoom === 1)
+										return 1
+									else return currentZoom + 0.1
+								})}>
+								<FontAwesome
+									name='search-plus'
+									size={35}
+									color='#FFF'
+								/>
+							</TouchableOpacity>
+
+							<TouchableOpacity
+								onPress={() => setZoom((currentZoom) => {
+									if (currentZoom === 0)
+										return 0
+									else return currentZoom - 0.1
+								})}>
+								<FontAwesome
+									name='search-minus'
+									size={35}
+									color='#FFF'
+								/>
+							</TouchableOpacity>
+						</View>
+						<View style={sCamera.cameraBottomWrapper}>
+							<TouchableOpacity style={sCamera.flashButton} onPress={() => {
+								setFlash(
+									flash === Camera.Constants.FlashMode.on
+										? Camera.Constants.FlashMode.off
+										: Camera.Constants.FlashMode.on
+								);
+							}}>
+								<FontAwesome
+									name='bolt'
+									size={30}
+									color={flash === Camera.Constants.FlashMode.on
+										? '#FFF'
+										: '#333'}
+								/>
+							</TouchableOpacity>
+							<TouchableOpacity activeOpacity={0.7} onPress={async () => {
+								if (cameraRef) {
+									let photo = await cameraRef.takePictureAsync();
+									setPictureTaken (photo);
+									console.log(pictureTaken)
+								}
+							}}>
+								<View
+									style={sCamera.cameraButton}
+								>
+									<FontAwesome name='camera' size={30} color="#333" />
+								</View>
+							</TouchableOpacity>
+							<TouchableOpacity activeOpacity={0.7} style={sCamera.Gallery} onPress={_pickImage}>
+								<FontAwesome name='image' size={30} color='#FFF' />
+							</TouchableOpacity>
+						</View>
 					</View>
+				</Camera>
+			</View>
+
+			: <View style={sCamera.content}>
+				<Image style={sCamera.photo} source={pictureTaken} />
+				<View>
+					<TouchableOpacity style={sCamera.confirm}>
+						<FontAwesome name='check-circle' size={40} color='#FFF'/>
+					</TouchableOpacity>
+					<TouchableOpacity style={sCamera.cancel} onPress={cancelPicture}>
+						<FontAwesome name='times-circle' size={40} color='#FFF'/>
+					</TouchableOpacity>
 				</View>
-			</Camera>
-		</View>
+			</View>
+
+	
+
 	)
 }
 
 export default CameraControl;
 
 /*
-Desisticar a camera
 conseguir tirar foto
 cortar foto (! procura lib pronta)
 salvar foto na galeria E no app
